@@ -21,7 +21,6 @@ Este projeto é um servidor de gerenciamento de clientes e produtos baseado no p
     ```
 
 <br>
----
 
 ## ⚙️ Configuração no Claude Desktop
 
@@ -31,6 +30,7 @@ Acesse o site oficial da Anthropic([Clade Desktop Download](https://claude.com/d
 2. Localização do Arquivo de Configuração
 O Claude Desktop utiliza um arquivo JSON para saber quais servidores MCP ele deve iniciar.
 
+**Passo a Passo:**
 
 **Windows:** Pressione **Win + R** e cole: **%APPDATA%\Claude\claude_desktop_config.json**<br>
 ou<br> 
@@ -60,7 +60,7 @@ NOTA: Clicando com botão direito na raiz do projeto "Copia Caminho" ou copiando
 <br>
 
 ## 📖 Documentação Adicional
-* **[🔌 Guia de Testes](URL aqui)
+* **([🔌 Guia de Testes](https://github.com/mateus-gondev/MCP-PIE/blob/main/docs/TOOLS.md))
 
 <br>
 
