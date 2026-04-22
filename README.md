@@ -12,7 +12,7 @@ Este projeto é um servidor de gerenciamento de clientes e produtos baseado no p
 ## 📦 Instalação
 1. Clone o repositório:
    ```bash
-   git clone ([Repositorio](https://github.com/mateus-gondev/MCP-PIE.git))
+   git clone https://github.com/mateus-gondev/MCP-PIE.git
    cd MCP-PIE
    ```
 2. Instale as dependências:
@@ -24,19 +24,19 @@ Este projeto é um servidor de gerenciamento de clientes e produtos baseado no p
 
 ## ⚙️ Configuração no Claude Desktop
 
-1. Instalação do Claude Desktop
+**1. Instalação do Claude Desktop**<br>
 Acesse o site oficial da Anthropic([Clade Desktop Download](https://claude.com/download)) e baixe a versão para Windows. Instale o aplicativo e faça login com sua conta gratuita.
 
-2. Localização do Arquivo de Configuração
+**2. Localização do Arquivo de Configuração**<br>
 O Claude Desktop utiliza um arquivo JSON para saber quais servidores MCP ele deve iniciar.
 
 **Passo a Passo:**
 
-**Windows:** Pressione **Win + R** e cole: **%APPDATA%\Claude\claude_desktop_config.json**<br>
+- **Windows:** Pressione **Win + R** e cole: **%APPDATA%\Claude\claude_desktop_config.json**<br>
 ou<br> 
-**Procure no Claude Desktop** Var em -> 3 barraras -> Arquivos -> Configurações -> Desenvolvedor -> Editar Config
+- **Procure no Claude Desktop** Var em -> 3 barraras -> Arquivos -> Configurações -> Desenvolvedor -> Editar Config
 
-Abra o arquivo claude_desktop_config.json e adicione a configuração abaixo. Atenção: Substitua o caminho pelo local onde você salvou este projeto.
+Abra o arquivo claude_desktop_config.json e adicione a configuração abaixo. **Atenção:** Substitua o caminho pelo local onde você salvou este projeto.
 
 ```bash
 {
@@ -60,8 +60,11 @@ NOTA: Clicando com botão direito na raiz do projeto "Copia Caminho" ou copiando
 <br>
 
 ## 📖 Documentação Adicional
-* **([🔌 Guia de Testes](https://github.com/mateus-gondev/MCP-PIE/blob/main/docs/TOOLS.md))
+Utilize esse guia para visualizar as **Tools** (Funções ou Ferramentas) que tem disponivel no projeto
+* ([🔌 Guia de Testes](https://github.com/mateus-gondev/MCP-PIE/blob/main/docs/TOOLS.md))
+
+
 
 <br>
 
-Projeto ainda em **Desenvolvimento**
+Projeto ainda em **Desenvolvimento**...
