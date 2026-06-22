@@ -1,19 +1,48 @@
 from mcp.server.fastmcp import FastMCP
-from typing import Literal, Dict, Any
+from pydantic import BaseModel
+from fastapi import Request
 import database
 import httpx
 import json
+import uvicorn
+
 
 mcp = FastMCP("Gestao_MCP")
-database.init_db() 
+database.init_db()
+
+from fastapi import FastAPI
+app = FastAPI()
+app.mount("/mcp", mcp.sse_app)
+
+@app.get("/llm-config")
+def get_llm_config():
+    return {
+        "modelos_disponiveis": [
+            "gemini",
+            "gpt-4o",
+            "claude-sonnet"
+        ]
+    }
+    
+    
+class RequestData(BaseModel):
+    mensagem: str
+    modelo: str
+
+# AGENTES MOCKADOS
+def executar_gemini(msg: str) -> str:
+    return f" [Gemini] respondeu: {msg}"
+
+def executar_gpt(msg: str) -> str:
+    return f" [GPT-4o] respondeu: {msg}"
+
+def executar_claude(msg: str) -> str:
+    return f" [Claude Sonnet] respondeu: {msg}"
+
 
 # Crud Produtos e Clientes
 @mcp.tool()
-def executar_operacao_crud(
-    tabela: Literal["clientes", "produtos"], 
-    acao: Literal["cadastrar", "editar", "remover", "listar"], 
-    dados: str = "{}"
-) -> str:
+def executar_operacao_crud(tabela: str, acao: str, dados: str = "{}") -> str:
     """
     Ferramenta generativa para realizar operações de CRUD (Criar, Ler, Atualizar e Deletar)
     nas tabelas de 'clientes' e 'produtos'.
@@ -96,6 +125,48 @@ async def atualizar_endereco_pelo_cpf_e_cep(cpf: str, cep: str) -> str:
         except Exception as e:
             return f"Erro na conexão com a API: {str(e)}"
 
+def executar_llm(mensagem: str, modelo: str):
+    
+    if modelo == "gemini":
+        return executar_gemini(mensagem)
+
+    elif modelo == "gpt-4o":
+        return executar_gpt(mensagem)
+
+    elif modelo == "claude-sonnet":
+        return executar_claude(mensagem)
+
+    else:
+        return "Modelo não suportado."
+
+
+
+# ROTEADOR DE MODELO
+def executar_llm(mensagem: str, modelo: str) -> str:
+
+    if modelo == "gemini":
+        return executar_gemini(mensagem)
+
+    elif modelo == "gpt-4o":
+        return executar_gpt(mensagem)
+
+    elif modelo == "claude-sonnet":
+        return executar_claude(mensagem)
+
+    else:
+        return "Modelo não suportado."
+
+
+# EXECUÇÃO PRINCIPAL
+@app.post("/executar")
+def executar(request: RequestData):
+    resposta = executar_llm(request.mensagem, request.modelo)
+    return {"resposta": resposta}
+
+
+@app.get("/")
+def root():
+    return {"status": "Servidor MCP rodando 🚀"}
 
 if __name__ == "__main__":
-    mcp.run()
+    uvicorn.run(app, host="0.0.0.0", port=8000)
